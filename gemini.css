@@ -1,0 +1,32 @@
+.event-container {
+    position: relative; /* Needed for absolute positioning of .know-more */
+    width: 300px; /* Adjust as needed */
+    height: 150px; /* Adjust as needed */
+    border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
+    overflow: hidden; /* Important:  Keeps the "KNOW MORE" hidden initially if positioned outside */
+}
+
+.event-text {
+    font-size: 20px; /* Adjust as needed */
+    padding: 20px;   /* Adjust as needed */
+    /* Add any other styling for the text */
+}
+
+.know-more {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000; /* Or your desired button color */
+    color: #fff; /* Or your desired button text color */
+    text-align: center;
+    padding: 10px;  /* Adjust as needed */
+    /* Initially hide the button */
+    transform: translateY(100%); /* Move it down out of view */
+    transition: transform 0.3s ease; /* Smooth transition for the hover effect */
+}
+
+/* Hover effect */
+.event-container:hover .know-more {
+    transform: translateY(0); /* Slide the button into view */
+}

@@ -1,0 +1,70 @@
+
+             .work__section--container .img__1 {
+        background-image: url(https://dnanetworks.com/wp-content/uploads/2023/09/trophy-dark-1.png);
+        display: inline-block;
+        transition: all .5s;
+        position: relative;
+      }
+
+      .work__section--container .img__1:hover {
+        background: url(https://dnanetworks.com/wp-content/uploads/2023/09/trophy-light-1.png) no-repeat;
+        background-size: cover;
+      }
+      @media (max-width: 768px) {
+        .work__section--container .img__1{
+        background: url(https://dnanetworks.com/wp-content/uploads/2023/09/trophy-light-1.png) no-repeat;
+        background-size: cover;
+      }
+    }
+          .work__section--container .img__2 {
+        background-image: url(https://dnanetworks.com/wp-content/uploads/2023/09/guitar-dark.png);
+        display: inline-block;
+        transition: all .5s;
+        position: relative;
+      }
+
+      .work__section--container .img__2:hover {
+        background: url(https://dnanetworks.com/wp-content/uploads/2023/09/guitar-light.png) no-repeat;
+        background-size: cover;
+      }
+      @media (max-width: 768px) {
+        .work__section--container .img__2{
+        background: url(https://dnanetworks.com/wp-content/uploads/2023/09/guitar-light.png) no-repeat;
+        background-size: cover;
+      }
+    }
+          .work__section--container .img__3 {
+        background-image: url(https://dnanetworks.com/wp-content/uploads/2023/09/podium-dark.png);
+        display: inline-block;
+        transition: all .5s;
+        position: relative;
+      }
+
+      .work__section--container .img__3:hover {
+        background: url(https://dnanetworks.com/wp-content/uploads/2023/09/podium-light.png) no-repeat;
+        background-size: cover;
+      }
+      @media (max-width: 768px) {
+        .work__section--container .img__3{
+        background: url(https://dnanetworks.com/wp-content/uploads/2023/09/podium-light.png) no-repeat;
+        background-size: cover;
+      }
+    }
+          .work__section--container .img__4 {
+        background-image: url(https://dnanetworks.com/wp-content/uploads/2023/09/decor-dark.png);
+        display: inline-block;
+        transition: all .5s;
+        position: relative;
+      }
+
+      .work__section--container .img__4:hover {
+        background: url(https://dnanetworks.com/wp-content/uploads/2023/09/decor-light.png) no-repeat;
+        background-size: cover;
+      }
+      @media (max-width: 768px) {
+        .work__section--container .img__4{
+        background: url(https://dnanetworks.com/wp-content/uploads/2023/09/decor-light.png) no-repeat;
+        background-size: cover;
+      }
+    }
+     

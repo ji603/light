@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Categories Display</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #000;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                              repeating-linear-gradient(45deg, rgba(20, 20, 40, 0.1) 0px, rgba(20, 20, 40, 0.1) 1px, transparent 1px, transparent 10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        .event-categories {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+        }
+
+        .event-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .event-category:hover {
+            transform: translateY(-10px);
+        }
+
+        .icon-platform {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .platform {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, #1e3c72, #152a50);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .platform::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #f5af19, #f12711);
+        }
+
+        .icon {
+            position: absolute;
+            top: -160px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon img {
+            max-height: 100%;
+            max-width: 80%;
+            object-fit: contain;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .know-more {
+            color: #f5af19;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .know-more:hover {
+            color: #f12711;
+        }
+
+        .spotlight {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .light {
+            position: absolute;
+            width: 120px;
+            height: 300px;
+            background: radial-gradient(circle at center, rgba(30, 144, 255, 0.3), transparent 70%);
+            opacity: 0.5;
+            filter: blur(20px);
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        @media (max-width: 768px) {
+            .event-categories {
+                gap: 20px;
+            }
+            
+            .event-category {
+                width: 200px;
+            }
+            
+            .icon-platform {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .icon {
+                top: -120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spotlight">
+            <div class="light" id="light1"></div>
+            <div class="light" id="light2"></div>
+            <div class="light" id="light3"></div>
+        </div>
+        <div class="event-categories">
+            <div class="event-category">
+                <div class="icon-platform">
+                    <div class="icon">
+                        <img src="data:image/jpeg;base64,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" alt="Sports Trophy">
+                    </div>
+                    <div class="platform"></div>
+                </div>
+                <div class="category-title">SPORTS EVENTS</div>
+                <div class="know-more">KNOW MORE</div>
+            </div>
+            
+            <div class="event-category">
+                <div class="icon-platform">
+                    <div class="icon">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48cGF0aCBkPSJNMjE2LDcyLjVWMTkyYTgsOCwwLDAsMS04LDhINDhhOCw4LDAsMCwxLTgtOFY2NC41YTgsOCwwLDAsMSw4LThoOTAuMjRhOCw4LDAsMCwxLDUuNjYsMi4zNGw2OS43Niw2OS43NkE4LDgsMCwwLDEsMjE2LDcyLjVabS0xNiwxMS4yTDEzOC4yNSw3Mi41VjEzMC41YTgsOCwwLDAsMCw4LDhoNTMuNzVabS02MS43NSw4NC44VjEzOC41YTI0LDI0LDAsMCwxLDI0LTI0aDU1LjQxbC00LDMySDEzNC4yNWE4LDgsMCwwLDAtOCw4djE2YTgsOCwwLDAsMCw4LDhoMjkuNzVsNiwxNkgxMzguMjVaTTk0LjI1LDEwOS43SDc0LjY4bDQuODYsMTZoOC43MWExMCwxMCwwLDAsMSwxMCwxMHYxMGExMCwxMCwwLDAsMS0xMCwxMEg3MS4yNWEyLDIsMCwwLDEtMi0yVjEzOS44NWExMCwxMCwwLDAsMSwxMC0xMGg2LjQ4bC00Ljg2LTE2SDYyLjI1YTI0LDI0LDAsMCwwLTI0LDI0djIzLjk1YTYsNiwwLDAsMCw2LDZoNjBhMjYsMjYsMCwwLDAsMjYtMjZ2LTEwQTI2LDI2LDAsMCwwLDk0LjI1LDEwOS43WiIgZmlsbD0iI2U1ZTVlNSIvPjwvc3ZnPg==" alt="Music Guitar">
+                    </div>
+                    <div class="platform"></div>
+                </div>
+                <div class="category-title">MUSIC EVENTS</div>
+                <div class="know-more">KNOW MORE</div>
+            </div>
+            
+            <div class="event-category">
+                <div class="icon-platform">
+                    <div class="icon">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48cGF0aCBkPSJNMjE2LDQ4VjIwOGE4LDgsMCwwLDEtOCw4SDQ4YTgsOCwwLDAsMS04LThWNDhhOCw4LDAsMCwxLDgtOEgyMDhBOCw4LDAsMCwxLDIxNiw0OFptLTE2LDE2SDU2VjE5Mmg0MFYxNjhhMTYsMTYsMCwwLDEsMTYtMTZoMzJhMTYsMTYsMCwwLDEsMTYsMTZ2MjRoNDBabS02NCw4MGE4LDgsMCwwLDAtOCw4djQwSDk2VjE1MmE4LDgsMCwwLDAtOC04SDcyYTgsOCwwLDAsMC04LDh2NDBINjRWODBoMTI4Wk0xMzIsOTZhMTIsMTIsMCwxLDAtMTItMTJBMTIsMTIsMCwwLDAsMTMyLDk2Wm0zMiwwYTEyLDEyLDAsMSwwLTEyLTEyQTEyLDEyLDAsMCwwLDE2NCw5NloiIGZpbGw9IiNlNWU1ZTUiLz48L3N2Zz4=" alt="Corporate Podium">
+                    </div>
+                    <div class="platform"></div>
+                </div>
+                <div class="category-title">CORPORATE EVENTS</div>
+                <div class="know-more">KNOW MORE</div>
+            </div>
+            
+            <div class="event-category">
+                <div class="icon-platform">
+                    <div class="icon">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48cGF0aCBkPSJNMjA4LDMySDQ4QTI0LDI0LDAsMCwwLDI0LDU2VjE3NmEyNCwyNCwwLDAsMCwyNCwyNEgyMDhhMjQsMjQsMCwwLDAsMjQtMjRWNTZBMjQsMjQsMCwwLDAsMjA4LDMyWm04LDE0NGE4LDgsMCwwLDEtOCw4SDQ4YTgsOCwwLDAsMS04LThWNTZhOCw4LDAsMCwxLDgtOEgyMDhhOCw4LDAsMCwxLDgsOFpNMTgwLDgwQTEyLDEyLDAsMSwwLDE2OCw2OCwxMiwxMiwwLDAsMCwxODAsODBaTTY0LDgwQTEyLDEyLDAsMSwwLDc2LDkyLDEyLDEyLDAsMCwwLDY0LDgwWm04MCw1NmE0MCw0MCwwLDAsMC00MC00MEg5NHY4MGg0MGMuNjcsMCwxLjMzLDAsMS45NS0uMDVhNDAuMDYsNDAuMDYsMCwwLDAsMzguMDUtMzkuOTVaTTY0LDEzNmExMiwxMiwwLDEsMCwxMi0xMkExMiwxMiwwLDAsMCw2NCwxMzZaTTk0LDEwNGgxMGEyNCwyNCwwLDAsMSwyNCwyNGEyNCwyNCwwLDAsMS0yNCwyNEg5NFoiIGZpbGw9IiNlNWU1ZTUiLz48L3N2Zz4=" alt="Special Events">
+                    </div>
+                    <div class="platform"></div>
+                </div>
+                <div class="category-title">SPECIAL EVENTS</div>
+                <div class="know-more">KNOW MORE</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animated spotlights
+            const lights = document.querySelectorAll('.light');
+            const container = document.querySelector('.container');
+            
+            // Initialize light positions
+            lights.forEach((light, index) => {
+                const x = Math.random() * container.offsetWidth;
+                const y = Math.random() * container.offsetHeight;
+                
+                light.style.left = `${x}px`;
+                light.style.top = `${y}px`;
+            });
+            
+            // Move lights for spotlight effect
+            function animateLights() {
+                lights.forEach((light, index) => {
+                    const x = Math.random() * container.offsetWidth;
+                    const y = Math.random() * container.offsetHeight;
+                    
+                    light.style.transition = 'all 8s ease-in-out';
+                    light.style.left = `${x}px`;
+                    light.style.top = `${y}px`;
+                });
+                
+                setTimeout(animateLights, 8000);
+            }
+            
+            animateLights();
+            
+            // 3D hover effect
+            const categories = document.querySelectorAll('.event-category');
+            
+            categories.forEach(category => {
+                category.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('.icon');
+                    icon.style.transform = 'translateX(-50%) translateY(-10px)';
+                    icon.style.transition = 'all 0.3s ease';
+                });
+                
+                category.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('.icon');
+                    icon.style.transform = 'translateX(-50%) translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
