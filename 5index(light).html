@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Spotlight Effect</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Item display styles */
+        .items-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .item {
+            position: relative;
+            width: 250px;
+            height: 350px;
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .item-image {
+            width: 100%;
+            height: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .podium {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(90deg, #aa8232, #ffd700, #aa8232);
+            border-radius: 50% 50% 0 0;
+            transition: all 0.5s ease;
+        }
+
+        .item-content {
+            width: 100%;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .item-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .know-more {
+            color: #aa8232;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        /* Spotlight effect nwe */
+        .spotlight {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at 50% 50%,
+                rgba(255, 255, 255, 0.3) 0%,
+                transparent 50%
+            );
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+          /*
+        .item:hover .spotlight {
+            opacity: 1;
+        }  
+*/
+        .item:hover .podium {
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        /* Cone light effect */
+        .cone-light {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to bottom,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 20%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0.1) 80%,
+                rgba(255, 255, 255, 0) 100%);
+            clip-path: polygon(50% 0%, 65% 100%, 35% 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            transform: translateY(-50px);
+        }
+
+        .light-source {
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(255, 255, 255, 0.5) 40%,
+                rgba(255, 255, 255, 0) 70%
+            );
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .light-rays {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(135deg, rgba(255,255,255,0.05) 0%,
+rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+                linear-gradient(45deg, rgba(255,255,255,0.05) 0%,
+rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 0%,
+rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+                linear-gradient(180deg, rgba(255,255,255,0.05) 0%,
+rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .item:hover .cone-light,
+        .item:hover .light-source,
+        .item:hover .light-rays {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; font-size: 3rem; margin-bottom:
+1rem;">WHAT WE DO</h1>
+        <p style="text-align: center; margin-bottom: 3rem;">We curate
+immersive solutions in sportainment, live entertainment, and virtual
+engagement.</p>
+
+        <div class="items-container">
+            <!-- Sports Events -->
+            <div class="item" onmousemove="moveSpotlight(event, this)"
+onmouseenter="showSpotlight(this)" onmouseleave="hideSpotlight(this)">
+                <div class="item-image">
+                    <img
+src="https://placeholder.pics/svg/150x200/DEDEDE/555555/trophy"
+alt="Sports Trophy">
+                    <div class="spotlight"></div>
+                    <div class="cone-light"></div>
+                    <div class="light-source"></div>
+                    <div class="light-rays"></div>
+                    <div class="podium"></div>
+                </div>
+                <div class="item-content">
+                    <h2 class="item-title">Sports Events</h2>
+                    <div class="know-more">Know More</div>
+                </div>
+            </div>
+
+            <!-- Music Events -->
+            <div class="item" onmousemove="moveSpotlight(event, this)"
+onmouseenter="showSpotlight(this)" onmouseleave="hideSpotlight(this)">
+                <div class="item-image">
+                    <img
+src="https://placeholder.pics/svg/150x200/DEDEDE/555555/guitar"
+alt="Guitar">
+                    <div class="spotlight"></div>
+                    <div class="cone-light"></div>
+                    <div class="light-source"></div>
+                    <div class="light-rays"></div>
+                    <div class="podium"></div>
+                </div>
+                <div class="item-content">
+                    <h2 class="item-title">Music Events</h2>
+                    <div class="know-more">Know More</div>
+                </div>
+            </div>
+
+            <!-- Corporate Events -->
+            <div class="item" onmousemove="moveSpotlight(event, this)"
+onmouseenter="showSpotlight(this)" onmouseleave="hideSpotlight(this)">
+                <div class="item-image">
+                    <img
+src="https://placeholder.pics/svg/150x200/DEDEDE/555555/corporate"
+alt="Corporate">
+                    <div class="spotlight"></div>
+                    <div class="cone-light"></div>
+                    <div class="light-source"></div>
+                    <div class="light-rays"></div>
+                    <div class="podium"></div>
+                </div>
+                <div class="item-content">
+                    <h2 class="item-title">Corporate Events</h2>
+                    <div class="know-more">Know More</div>
+                </div>
+            </div>
+
+            <!-- Special Events -->
+            <div class="item" onmousemove="moveSpotlight(event, this)"
+onmouseenter="showSpotlight(this)" onmouseleave="hideSpotlight(this)">
+                <div class="item-image">
+                    <img
+src="https://placeholder.pics/svg/150x200/DEDEDE/555555/special"
+alt="Special Events">
+                    <div class="spotlight"></div>
+                    <div class="cone-light"></div>
+                    <div class="light-source"></div>
+                    <div class="light-rays"></div>
+                    <div class="podium"></div>
+                </div>
+                <div class="item-content">
+                    <h2 class="item-title">Special Events</h2>
+                    <div class="know-more">Know More</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to create dynamic spotlight effect
+        function moveSpotlight(event, element) {
+            const spotlight = element.querySelector('.spotlight');
+            const rect = element.getBoundingClientRect();
+
+            // Calculate position relative to the element
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Update the spotlight position
+            spotlight.style.background = `radial-gradient(
+                circle at ${x}px ${y}px,
+                rgba(255, 255, 255, 0.4) 0%,
+                transparent 50%
+            )`;
+        }
+
+        // Function to show the spotlight effect with animation
+        function showSpotlight(element) {
+            // Add a dust/particle effect to make the light more visible
+            const imageContainer = element.querySelector('.item-image');
+
+            // Create dust particles
+            for(let i = 0; i < 15; i++) {
+                const dust = document.createElement('div');
+                dust.classList.add('dust-particle');
+                dust.style.width = Math.random() * 3 + 1 + 'px';
+                dust.style.height = dust.style.width;
+                dust.style.background = 'rgba(255, 255, 255, 0.5)';
+                dust.style.position = 'absolute';
+                dust.style.borderRadius = '50%';
+                dust.style.top = Math.random() * 100 + '%';
+                dust.style.left = Math.random() * 100 + '%';
+                dust.style.animation = `float ${Math.random() * 5 +
+3}s linear infinite`;
+                dust.style.opacity = '0';
+                dust.style.transition = 'opacity 0.5s ease';
+
+                imageContainer.appendChild(dust);
+
+                // Trigger reflow for animation to work
+                void dust.offsetWidth;
+
+                dust.style.opacity = Math.random() * 0.5 + 0.2;
+            }
+        }
+
+        // Function to hide the spotlight effect
+        function hideSpotlight(element) {
+            // Remove dust particles
+            const particles = element.querySelectorAll('.dust-particle');
+            particles.forEach(particle => {
+                particle.remove();
+            });
+        }
+
+        // Add keyframe animation for floating dust
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes float {
+                0% {
+                    transform: translateY(0) translateX(0);
+                    opacity: 0.2;
+                }
+                50% {
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: translateY(-30px)
+translateX(${Math.random() * 20 - 10}px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

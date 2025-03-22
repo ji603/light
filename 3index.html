@@ -11,7 +11,7 @@
 	<!-- <link rel="preload" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet" async> -->
 	<link rel="icon" type="image/png" href="https://dnanetworks.com/wp-content/themes/dna-entertainment/dist/images/src/images/dna-logo.svg">
 
-		
+		<p>new</p>
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 
 	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
@@ -45,7 +45,7 @@
 :root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
 </style> -->
 <!-- <link rel='stylesheet' id='dna-entertainment-style-css' href='https://dnanetworks.com/wp-content/themes/dna-entertainment/style.css?ver=1.0.0' media='all' /> -->
-<link rel='stylesheet' id='custom-styles-css' href='https://dnanetworks.com/wp-content/themes/dna-entertainment/dist/app.min.css?ver=1.2.9' media='all' /> -->
+<!-- <link rel='stylesheet' id='custom-styles-css' href='https://dnanetworks.com/wp-content/themes/dna-entertainment/dist/app.min.css?ver=1.2.9' media='all' /> --> -->
 
 
 <link rel="https://api.w.org/" href="https://dnanetworks.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://dnanetworks.com/wp-json/wp/v2/pages/19" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://dnanetworks.com/xmlrpc.php?rsd" />
@@ -307,158 +307,7 @@ var wpcf7 = {"api":{"root":"https:\/\/dnanetworks.com\/wp-json\/","namespace":"c
 
 
 	
-	<script>
-	//<--------------- Our Work Swiper ------------->//
 	
-	var swiper;
-	
-	function initSwiper() {
-	  if (window.innerWidth < 768) {
-		// For screens smaller than 768px 
-		swiper = new Swiper(".mySwiper", {
-		  slidesPerView: 1, 
-		  spaceBetween: 20, 
-		  navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-		  },
-		  pagination: {
-			el: ".swiper-pagination",
-			clickable: true,
-			dynamicBullets: true,
-		  },
-		});
-	  } else if (window.innerWidth >= 768 && window.innerWidth < 1200) {
-		// For screens between 768px and 1200px
-		swiper = new Swiper(".mySwiper", {
-		  slidesPerView: 2, 
-		  spaceBetween: 20, 
-		  navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-		  },
-		  pagination: {
-			el: ".swiper-pagination",
-			clickable: true,
-			dynamicBullets: true,
-		  },
-		});
-	  } else {
-		// no Swiper instance 
-		swiper = null;
-	  }
-	}
-	
-	// Initialize Swiper on page load
-	initSwiper();
-	
-	// Update Swiper on window resize
-	// window.addEventListener("resize", function () {
-	//   if (swiper) {
-	// 	swiper.destroy(true, true); 
-	//   }
-	//   initSwiper(); 
-	// });
-	
-	
-	//<--------------- Our Work Swiper ------------->//
-	
-	</script>
-	
-<script>
-	jQuery(document).ready(function($) {
-		// Function to handle the click event on artist, year, and city dropdowns
-		$('#musicEventsArtist, #musicEventsYear, #musicEventsCity, #corporateEventType').on('click', 'li', function() {
-			var taxonomy_artist = $('#musicEventsArtist li.active').data('taxonomy');
-			var value_artist = $('#musicEventsArtist li.active').data('value');
-			var taxonomy_year = $('#musicEventsYear li.active').data('taxonomy');
-			var value_year = $('#musicEventsYear li.active').data('value');
-			var taxonomy_location = $('#musicEventsCity li.active').data('taxonomy');
-			var value_location = $('#musicEventsCity li.active').data('value');
-
-			var taxonomy_events_type = $('#corporateEventType li.active').data('taxonomy');
-			var value_events_type = $('#corporateEventType li.active').data('value');
-
-			var page_slug = $('#page-slug').data('value');
-
-			filterMusicEvents(taxonomy_artist, value_artist, taxonomy_year, value_year, taxonomy_location, value_location, taxonomy_events_type, value_events_type, page_slug);
-
-			$(this).closest('.filter-option-main').find('.filter-reset-btn').css('display', 'flex');
-		});
-
-		// Function to filter and display music events based on the selected taxonomy and value
-		function filterMusicEvents(taxonomy_artist, value_artist, taxonomy_year, value_year, taxonomy_location, value_location, taxonomy_events_type, value_events_type, page_slug) {
-			// AJAX request to fetch the filtered posts
-			$.ajax({
-			url: 'https://dnanetworks.com/wp-admin/admin-ajax.php',
-			type: 'POST',
-			data: {
-				action: 'filter_music_events',
-				taxonomy_artist: taxonomy_artist,
-				value_artist: value_artist,
-				taxonomy_year: taxonomy_year,
-				value_year: value_year,
-				taxonomy_location: taxonomy_location,
-				value_location: value_location,
-				taxonomy_events_type: taxonomy_events_type,
-				value_events_type: value_events_type,
-				page_slug: page_slug
-			},
-			beforeSend: function() {
-				// Show a loading indicator if needed
-			},
-			success: function(response) {
-				var musicEventsContainer = $('.events_post_filter_output');
-				musicEventsContainer.html(response);
-			},
-			error: function(error) {
-				console.error('Error:', error);
-			},
-			complete: function() {
-				// Perform any necessary cleanup or post-processing
-			}
-			});
-		}
-
-		$('.filter-reset-btn').on('click', function() {
-			// Clear the active class from all filter options
-			var activeFilterItems = $('#musicEventsArtist li, #musicEventsYear li, #musicEventsCity li, #corporateEventType li');
-			activeFilterItems.removeClass('active');
-
-			// Reset filter values
-			var taxonomy_artist = '';
-			var value_artist = '';
-			var taxonomy_year = '';
-			var value_year = '';
-			var taxonomy_location = '';
-			var value_location = '';
-			var taxonomy_events_type = '';
-			var value_events_type = '';
-
-			var page_slug = $('#page-slug').data('value');
-
-			// Call the filterMusicEvents function with default values to reset filters
-			filterMusicEvents(taxonomy_artist, value_artist, taxonomy_year, value_year, taxonomy_location, value_location, taxonomy_events_type, value_events_type, page_slug);
-
-			$('#artist').text('ARTIST');
-			$('#year').text('YEAR');
-			$('#city').text('CITY');
-			$('#type-of-events').text('TYPE OF EVENTS');
-			
-			var button = $(this);
-			setTimeout(function() {
-            	button.hide();
-			}, 300);
-		});
-	});
-
-	// Years of Experience Updater for the counter
-	jQuery(document).ready(function($) {
-		var yearsOfExperience = 40;
-		$('#countYear').attr('data-to', yearsOfExperience);
-	});
-</script>
-
 
 
 
